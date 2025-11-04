@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deogiri College | Departments</title>
+    <link rel="stylesheet" href="/css/dept.css" />
+    <style>
+      /* ================= FOOTER ================= */
+      footer {
+        background: var(--primary);
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      footer p {
+        margin: 6px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ===== Header ===== -->
+    <header class="site-header">
+      <div class="container topbar">
+        <div class="brand">
+          <img src="/images/logo.jpg" alt="Deogiri College Logo" />
+          <div class="brand-text">
+            <h1>Deogiri College</h1>
+            <p>Since 1960 • NAAC Accredited</p>
+          </div>
+        </div>
+
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="department.html" class="active">Departments</a>
+          <a href="notice.html">Notices</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="addmision.html" class="cta">Admissions</a>
+          <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+        </nav>
+      </div>
+
+      <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="department.html" class="active">Departments</a>
+        <a href="notice.html">Notices</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="addmision.html" class="cta">Admissions</a>
+      </div>
+    </header>
+
+    <!-- ===== Departments Section ===== -->
+    <main class="departments container">
+      <h2 class="section-title">Our Departments</h2>
+      <div class="department-grid">
+        <article class="card">
+          <h3>Science</h3>
+          <p>Explore Physics, Chemistry, Biology, and more.</p>
+          <a href="sci.html" class="btn">Learn More</a>
+        </article>
+
+        <article class="card">
+          <h3>Commerce</h3>
+          <p>Focus on Business, Economics, and Accountancy.</p>
+          <a href="com.html" class="btn">Learn More</a>
+        </article>
+
+        <article class="card">
+          <h3>Arts</h3>
+          <p>Dive into Literature, History, and Social Sciences.</p>
+          <a href="arts.html" class="btn">Learn More</a>
+        </article>
+
+        <article class="card">
+          <h3>Computer Science</h3>
+          <p>Learn Programming, Data Science, and Artificial Intelligence.</p>
+          <a href="cs.html" class="btn">Learn More</a>
+        </article>
+
+        <article class="card">
+          <h3>Sports</h3>
+          <p>Develop skills and build a career in sports and fitness.</p>
+          <a href="sports.html" class="btn">Learn More</a>
+        </article>
+
+        <article class="card">
+          <h3>Drama</h3>
+          <p>Explore acting, theatre, and performance arts.</p>
+          <a href="drama.html" class="btn">Learn More</a>
+        </article>
+      </div>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <!-- ================= FOOTER ================= -->
+    <footer>
+      <p>© 2025 Deogiri College, Aurangabad</p>
+      <p>Affiliated with Dr. Babasaheb Ambedkar Marathwada University</p>
+      <p>Developed by Ganesh Thigale <b>with 💗 and code</b></p>
+    </footer>
+
+    <!-- ===== Script ===== -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        hamburger.addEventListener("click", () => {
+          const isOpen = mobileMenu.classList.toggle("active");
+          hamburger.textContent = isOpen ? "✕" : "☰";
+          mobileMenu.setAttribute("aria-hidden", !isOpen);
+          hamburger.setAttribute("aria-expanded", isOpen);
+        });
+
+        // Close menu on link click
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("active");
+            hamburger.textContent = "☰";
+            mobileMenu.setAttribute("aria-hidden", true);
+            hamburger.setAttribute("aria-expanded", false);
+          });
+        });
+
+        // Reset on resize
+        window.addEventListener("resize", () => {
+          if (window.innerWidth > 768) {
+            mobileMenu.classList.remove("active");
+            hamburger.textContent = "☰";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

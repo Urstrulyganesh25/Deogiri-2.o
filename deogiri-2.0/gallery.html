@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deogiri College - Gallery</title>
+
+    <style>
+      :root {
+        --primary: #1446ac;
+        --accent: #fdd835;
+        --radius: 12px;
+        --max-width: 1200px;
+        --shadow: 0 8px 30px rgba(2, 6, 23, 0.06);
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+          sans-serif;
+      }
+
+      body {
+        margin: 0;
+        color: #222;
+        background: #f9fafc;
+      }
+
+      .container {
+        width: calc(100% - 32px);
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+
+      /* ================= NAVBAR ================= */
+      header.site-header {
+        background: #fff;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: 16px;
+        color: var(--primary);
+      }
+
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .main-nav a {
+        color: #333;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+      }
+
+      .main-nav a:hover {
+        background: rgba(20, 70, 172, 0.1);
+        color: var(--primary);
+      }
+
+      .cta a {
+        background: var(--accent);
+        color: #000;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .cta a:hover {
+        background: #ffeb3b;
+      }
+
+      /* ===== HAMBURGER ===== */
+      .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 26px;
+        cursor: pointer;
+      }
+
+      /* ===== MOBILE MENU ===== */
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        border-top: 1px solid #eee;
+        box-shadow: var(--shadow);
+      }
+
+      .mobile-menu a {
+        padding: 12px 16px;
+        color: #333;
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 1px solid #eee;
+      }
+
+      .mobile-menu a:hover {
+        background: rgba(20, 70, 172, 0.05);
+      }
+
+      .mobile-menu.active {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ====== GALLERY ====== */
+      .gallery-section {
+        padding: 60px 20px;
+        background: linear-gradient(135deg, #1446ac 20%, #1e88e5 100%);
+        color: white;
+        text-align: center;
+      }
+
+      .gallery-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 40px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .gallery-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      }
+
+      .gallery-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      /* ===== LIGHTBOX ===== */
+      .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 999;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .lightbox img {
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 10px;
+      }
+
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 40px;
+        color: white;
+        cursor: pointer;
+      }
+
+      .lightbox-controls {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 30px;
+      }
+
+      .prev,
+      .next {
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .prev:hover,
+      .next:hover {
+        color: var(--accent);
+      }
+
+      @media (max-width: 768px) {
+        .main-nav a,
+        .cta {
+          display: none;
+        }
+
+        .hamburger {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container topbar">
+        <div class="brand">
+          <img src="images/logo.jpg" alt="Deogiri College Logo" />
+          <div>
+            <h1>Deogiri College</h1>
+            <div style="font-size: 13px; color: #666">
+              Since 1960 • NAAC Accredited
+            </div>
+          </div>
+        </div>
+
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="department.html">Departments</a>
+          <a href="notice.html">Notices</a>
+          <a href="gallery.html">Gallery</a>
+          <div class="cta"><a href="addmision.html">Admissions</a></div>
+          <button class="hamburger" id="hamburger">☰</button>
+        </nav>
+      </div>
+
+      <div id="mobileMenu" class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="department.html">Departments</a>
+        <a href="notice.html">Notices</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="addmision.html">Admissions</a>
+      </div>
+    </header>
+
+    <!-- ====== Gallery Section ====== -->
+    <section id="gallery" class="gallery-section">
+      <h2 class="gallery-title">Campus Gallery</h2>
+
+      <div class="gallery-grid">
+        <img
+          src="images/programm.jpg"
+          alt="College Event 1"
+          class="gallery-img"
+        />
+        <img src="images/camp-2.jpg" alt="Library" class="gallery-img" />
+        <img src="images/camp-4.jpg" alt="Campus View" class="gallery-img" />
+        <img src="images/NCC.jpg" alt="NCC Parade" class="gallery-img" />
+        <img
+          src="images/practicle-2.jpg"
+          alt="Science Lab"
+          class="gallery-img"
+        />
+        <img
+          src="images/tree planting.jpg"
+          alt="Tree Plantation Drive"
+          class="gallery-img"
+        />
+      </div>
+
+      <!-- Lightbox / Slider -->
+      <div id="lightbox" class="lightbox hidden">
+        <span class="close">&times;</span>
+        <img class="lightbox-image" src="" alt="Expanded view" />
+        <div class="lightbox-controls">
+          <span class="prev">&#10094;</span>
+          <span class="next">&#10095;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-column">
+          <!-- <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="department.html">Departments</a></li>
+            <li><a href="notice.html">Notices</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="addmision.html">Admissions</a></li>
+          </ul> -->
+        </div>
+
+        <div class="footer-column">
+          <h4>Contact Us</h4>
+          <p>Deogiri College Campus,<br />Station Road, Aurangabad – 431005</p>
+          <p>📞 0240-2367575</p>
+          <p>📧 info@deogiricollege.org</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Deogiri College, Aurangabad. All Rights Reserved.</p>
+        <div class="social-icons">
+          <a href="#"><img src="icons/facebook.svg" alt="Facebook" /></a>
+          <a href="#"><img src="icons/twitter.svg" alt="Twitter" /></a>
+          <a href="#"><img src="icons/instagram.svg" alt="Instagram" /></a>
+          <a href="#"><img src="icons/linkedin.svg" alt="LinkedIn" /></a>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      .site-footer {
+        background: #0d2f75;
+        color: #fff;
+        padding: 60px 20px 20px;
+        font-family: Inter, system-ui, sans-serif;
+      }
+
+      .footer-container {
+        display: flex;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-column h3,
+      .footer-column h4 {
+        margin-bottom: 16px;
+        color: var(--accent, #fdd835);
+      }
+
+      .footer-column p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 8px;
+      }
+
+      .footer-column a {
+        color: #eee;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .footer-column a:hover {
+        color: var(--accent, #fdd835);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        margin-top: 40px;
+        padding-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin-inline: auto;
+      }
+
+      .footer-bottom p {
+        margin: 0;
+        font-size: 14px;
+        color: #ccc;
+      }
+
+      .social-icons a img {
+        width: 22px;
+        height: 22px;
+        margin-left: 12px;
+        filter: brightness(0) invert(1);
+        transition: 0.3s ease;
+      }
+
+      .social-icons a img:hover {
+        filter: brightness(0.8) sepia(1) saturate(3) hue-rotate(45deg);
+      }
+
+      @media (max-width: 600px) {
+        .footer-bottom {
+          flex-direction: column;
+          gap: 10px;
+          text-align: center;
+        }
+      }
+    </style>
+
+    <script>
+      // NAVBAR MOBILE TOGGLE
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      hamburger.addEventListener("click", () => {
+        const open = mobileMenu.classList.toggle("active");
+        hamburger.textContent = open ? "✕" : "☰";
+      });
+
+      // LIGHTBOX FUNCTIONALITY
+      const galleryImages = document.querySelectorAll(".gallery-img");
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.querySelector(".lightbox-image");
+      const close = document.querySelector(".close");
+      const next = document.querySelector(".next");
+      const prev = document.querySelector(".prev");
+
+      let currentIndex = 0;
+
+      function showImage(index) {
+        lightboxImage.src = galleryImages[index].src;
+        lightbox.classList.remove("hidden");
+        currentIndex = index;
+      }
+
+      galleryImages.forEach((img, index) => {
+        img.addEventListener("click", () => showImage(index));
+      });
+
+      close.addEventListener("click", () => {
+        lightbox.classList.add("hidden");
+      });
+
+      next.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % galleryImages.length;
+        showImage(currentIndex);
+      });
+
+      prev.addEventListener("click", () => {
+        currentIndex =
+          (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        showImage(currentIndex);
+      });
+
+      // Close lightbox on background click
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) lightbox.classList.add("hidden");
+      });
+    </script>
+  </body>
+</html>

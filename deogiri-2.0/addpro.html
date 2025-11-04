@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admissions - Deogiri College</title>
+    <link rel="stylesheet" href="admission.css" />
+    <style>
+      :root {
+        --primary: #0d2f75;
+        --accent: #fdd835;
+        --radius: 10px;
+        --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        --max-width: 1100px;
+        --text-color: #222;
+        --bg-light: #fafafa;
+      }
+
+      /* ===== RESET ===== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* ===== BASE ===== */
+      body {
+        font-family: Inter, system-ui, sans-serif;
+        background: var(--bg-light);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .container {
+        width: calc(100% - 32px);
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+
+      /* ===== HEADER ===== */
+      .site-header {
+        background: #fff;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .brand h1 {
+        font-size: 18px;
+        color: var(--primary);
+      }
+
+      .brand p {
+        font-size: 13px;
+        color: #666;
+      }
+
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .main-nav a {
+        color: var(--primary);
+        font-weight: 600;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+
+      .main-nav a:hover,
+      .main-nav a.active {
+        background: rgba(13, 47, 117, 0.1);
+      }
+
+      .cta {
+        background: var(--accent);
+        color: #000 !important;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      /* ================= FOOTER ================= */
+      footer {
+        background: var(--primary);
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      footer p {
+        margin: 6px 0;
+      }
+
+      /* ===== MOBILE MENU ===== */
+      .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 26px;
+        cursor: pointer;
+      }
+
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        border-top: 1px solid #eee;
+        box-shadow: var(--shadow);
+      }
+
+      .mobile-menu a {
+        padding: 12px 16px;
+        color: var(--primary);
+        font-weight: 600;
+        text-decoration: none;
+        border-bottom: 1px solid #eee;
+      }
+
+      .mobile-menu a:hover {
+        background: rgba(13, 47, 117, 0.05);
+      }
+
+      .mobile-menu.active {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ===== ADMISSION CONTENT ===== */
+      h2 {
+        color: var(--primary);
+        text-align: center;
+        margin: 2rem 0 1rem;
+      }
+
+      .steps {
+        display: grid;
+        gap: 0.8rem;
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .step {
+        background: rgba(13, 47, 117, 0.05);
+        padding: 0.7rem 1rem;
+        border-radius: var(--radius);
+        font-weight: 500;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        background: #fff;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      form label {
+        font-weight: 600;
+      }
+
+      form input,
+      form select {
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: var(--radius);
+        font-size: 1rem;
+      }
+
+      form button {
+        margin-top: 1rem;
+        padding: 0.7rem;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius);
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      form button:hover {
+        background: #163c93;
+      }
+
+      .faq {
+        margin-top: 2rem;
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .faq h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .faq-item {
+        margin-bottom: 1rem;
+      }
+
+      .faq-item strong {
+        display: block;
+        color: #000;
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background: var(--primary);
+        color: #fff;
+        text-align: center;
+        padding: 1rem;
+        margin-top: 2rem;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .main-nav a,
+        .cta {
+          display: none;
+        }
+
+        .hamburger {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container topbar">
+        <div class="brand">
+          <img src="/images/logo.jpg" alt="Deogiri College Logo" />
+          <div>
+            <h1>Deogiri College</h1>
+            <p>Since 1960 • NAAC Accredited</p>
+          </div>
+        </div>
+
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="department.html">Departments</a>
+          <a href="notice.html">Notices</a>
+          <a href="gallery.html">Gallery</a>
+          <a class="cta active" href="addmision.html">Admissions</a>
+          <button class="hamburger" id="hamburger">☰</button>
+        </nav>
+      </div>
+
+      <div id="mobileMenu" class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="department.html">Departments</a>
+        <a href="notice.html">Notices</a>
+        <a href="gallery.html">Gallery</a>
+        <a class="cta active" href="addmision.html">Admissions</a>
+      </div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main class="container">
+      <section class="intro">
+        <h2>Admission Process</h2>
+        <div class="steps">
+          <div class="step">1️⃣ Fill the online application form.</div>
+          <div class="step">2️⃣ Upload required documents.</div>
+          <div class="step">3️⃣ Pay the admission fee online.</div>
+          <div class="step">4️⃣ Appear for counseling/verification.</div>
+          <div class="step">
+            5️⃣ Confirm your admission and collect your ID card.
+          </div>
+        </div>
+      </section>
+
+      <section class="apply">
+        <h2>Apply Now</h2>
+        <form id="admissionForm">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" required />
+
+          <label for="course">Select Course</label>
+          <select id="course" required>
+            <option value="">--Select--</option>
+            <option>B.Sc</option>
+            <option>B.Com</option>
+            <option>B.A</option>
+            <option>BCA</option>
+            <option>M.Sc</option>
+          </select>
+
+          <button type="submit">Submit Application</button>
+        </form>
+      </section>
+
+      <section class="faq">
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item">
+          <strong>Q: What documents are required?</strong>
+          <p>
+            A: Marksheet, Transfer Certificate, ID Proof, and Passport Photo.
+          </p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: Can I apply for multiple courses?</strong>
+          <p>A: Yes, but you must submit a separate form for each course.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: Is there a reservation system?</strong>
+          <p>
+            A: Yes, admissions follow all government reservation guidelines.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <!-- ================= FOOTER ================= -->
+    <footer>
+      <p>© 2025 Deogiri College, Aurangabad</p>
+      <p>Affiliated with Dr. Babasaheb Ambedkar Marathwada University</p>
+      <p>Developed by Ganesh Thigale <b>with 💗 and code</b></p>
+    </footer>
+    <script>
+      // ===== Mobile Menu Toggle =====
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      hamburger.addEventListener("click", () => {
+        const open = mobileMenu.classList.toggle("active");
+        hamburger.textContent = open ? "✕" : "☰";
+        hamburger.setAttribute("aria-expanded", open);
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+          hamburger.textContent = "☰";
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) {
+          mobileMenu.classList.remove("active");
+          hamburger.textContent = "☰";
+        }
+      });
+
+      // ===== Dummy Form Handler =====
+      document
+        .getElementById("admissionForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert("Your application has been submitted successfully!");
+          e.target.reset();
+        });
+    </script>
+  </body>
+</html>

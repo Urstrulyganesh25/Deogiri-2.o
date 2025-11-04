@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Science Department - Deogiri College</title>
+
+    <style>
+      :root {
+        --primary: #003366;
+        --accent: #ffd700;
+        --text: #222;
+        --bg: #f9f9f9;
+        --card: #fff;
+        --shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        --radius: 12px;
+        --max-width: 1200px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Inter, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      .container {
+        width: calc(100% - 32px);
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+
+      /* ===== HEADER ===== */
+      header.site-header {
+        background: var(--card);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .brand h1 {
+        font-size: 18px;
+        margin: 0;
+        color: var(--primary);
+      }
+
+      .brand span {
+        font-size: 13px;
+        color: #666;
+      }
+
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .main-nav a {
+        color: #333;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+      }
+
+      .main-nav a:hover {
+        background: rgba(0, 51, 102, 0.1);
+      }
+
+      .cta {
+        background: var(--accent);
+        color: #000;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      /* ===== HAMBURGER ===== */
+      .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 26px;
+        cursor: pointer;
+      }
+
+      /* ===== MOBILE MENU ===== */
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background: var(--card);
+        border-top: 1px solid #eee;
+        box-shadow: var(--shadow);
+        padding: 10px 0;
+      }
+
+      .mobile-menu a {
+        padding: 12px 16px;
+        color: #333;
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 1px solid #eee;
+      }
+
+      .mobile-menu.active {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ===== BANNER ===== */
+      .banner {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("science-banner.jpg") center/cover no-repeat;
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      /* ===== SECTIONS ===== */
+      section {
+        padding: 2rem;
+        background: var(--card);
+        margin: 1.5rem auto;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        width: calc(100% - 32px);
+        max-width: var(--max-width);
+      }
+
+      section h2 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      ul {
+        margin-left: 1.5rem;
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background: var(--primary);
+        color: #fff;
+        text-align: center;
+        padding: 1rem;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .main-nav a,
+        .cta {
+          display: none;
+        }
+        .hamburger {
+          display: block;
+        }
+        .banner {
+          font-size: 1.5rem;
+          height: 180px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container topbar">
+        <div class="brand">
+          <img src="/images/logo.jpg" alt="Deogiri College Logo" />
+          <div>
+            <h1>Deogiri College</h1>
+            <span>Since 1960 • NAAC Accredited</span>
+          </div>
+        </div>
+
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="department.html">Departments</a>
+          <a href="notice.html">Notices</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="admission.html" class="cta">Admissions</a>
+          <button class="hamburger" id="hamburger">☰</button>
+        </nav>
+      </div>
+
+      <div id="mobileMenu" class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="department.html">Departments</a>
+        <a href="notice.html">Notices</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="admission.html">Admissions</a>
+      </div>
+    </header>
+
+    <div class="banner">Welcome to the Science Department</div>
+
+    <section>
+      <h2>About the Department</h2>
+      <p>
+        The Science Department at Deogiri College offers a diverse range of
+        subjects including Physics, Chemistry, Biology, and Computer Science. We
+        aim to provide a solid foundation in scientific principles while
+        nurturing analytical and critical thinking skills.
+      </p>
+    </section>
+
+    <section>
+      <h2>Faculty</h2>
+      <ul>
+        <li>Dr. A. Sharma – Head of Department, Physics</li>
+        <li>Prof. B. Patil – Chemistry</li>
+        <li>Dr. C. Joshi – Biology</li>
+        <li>Prof. D. Rao – Mathematics</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Courses Offered</h2>
+      <ul>
+        <li>B.Sc. in Physics, Chemistry, Mathematics, Computer Science</li>
+        <li>B.Sc. in Biotechnology</li>
+        <li>M.Sc. in Physics</li>
+        <li>M.Sc. in Chemistry</li>
+        <li>Ph.D. in Life Sciences</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Labs & Facilities</h2>
+      <p>
+        Our department features modern laboratories for Physics, Chemistry, and
+        Biology, along with a state-of-the-art computer lab for simulations and
+        research work.
+      </p>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Deogiri College. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      hamburger.addEventListener("click", () => {
+        const open = mobileMenu.classList.toggle("active");
+        hamburger.textContent = open ? "✕" : "☰";
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+          hamburger.textContent = "☰";
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) {
+          mobileMenu.classList.remove("active");
+          hamburger.textContent = "☰";
+        }
+      });
+    </script>
+  </body>
+</html>
